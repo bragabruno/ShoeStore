@@ -1,5 +1,6 @@
 package com.udacity.shoestore.placeholder
 
+import com.udacity.shoestore.models.Shoe
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -14,44 +15,44 @@ object PlaceholderContent {
     /**
      * An array of sample (placeholder) items.
      */
-    val ITEMS: MutableList<PlaceholderItem> = ArrayList()
+    val ITEMS: MutableList<Shoe> = ArrayList()
 
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
+    val ITEM_MAP: MutableMap<String, Shoe> = HashMap()
 
     private val COUNT = 25
 
     init {
         // Add some sample items.
-        for (i in 1..COUNT) {
+        for (i: Int in 1..COUNT) {
             addItem(createPlaceholderItem(i))
         }
     }
 
-    private fun addItem(item: PlaceholderItem) {
+    private fun addItem(item: Shoe) {
         ITEMS.add(item)
         ITEM_MAP.put(item.id, item)
     }
 
-    private fun createPlaceholderItem(position: Int): PlaceholderItem {
-        return PlaceholderItem(position.toString(), "Item " + position, makeDetails(position))
+    private fun createPlaceholderItem(position: Int): Shoe {
+        return Shoe(position.toString(), "Jordan's " + position,1.0,"Nike", makeDetails(position), mutableListOf("Image1", "Image2"))
     }
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()
         builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
+//        for (i in 0..position - 1) {
             builder.append("\nMore details information here.")
-        }
+//        }
         return builder.toString()
     }
 
     /**
      * A placeholder item representing a piece of content.
      */
-    data class PlaceholderItem(val id: String, val content: String, val details: String) {
-        override fun toString(): String = content
-    }
+//    data class Shoe(val id: String, val content: String, val details: String) {
+//        override fun toString(): String = content
+//    }
 }
