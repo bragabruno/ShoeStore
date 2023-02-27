@@ -1,11 +1,8 @@
 package com.udacity.shoestore
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.navigation.Navigation.findNavController
@@ -24,17 +21,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
             Timber.plant(Timber.DebugTree())
         }
-        setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(
+            R.menu.overflow_menu,
+            menu,
+        )
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return  NavigationUI.onNavDestinationSelected(item!!,
-                findNavController(this, R.id.container))
-                || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item!!,
+            findNavController(this, R.id.container),
+        ) ||
+            super.onOptionsItemSelected(item)
     }
 }
