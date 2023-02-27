@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.udacity.shoestore.MyshoesRecyclerViewAdapter
+import com.udacity.shoestore.ShoesRecyclerViewAdapter
 import com.udacity.shoestore.R
 import com.udacity.shoestore.placeholder.PlaceholderContent
 
@@ -41,7 +41,7 @@ class ShoesFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyshoesRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                adapter = ShoesRecyclerViewAdapter(PlaceholderContent.ITEMS)
             }
         }
         return view

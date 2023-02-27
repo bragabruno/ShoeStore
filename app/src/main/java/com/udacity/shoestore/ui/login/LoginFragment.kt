@@ -16,6 +16,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.udacity.shoestore.databinding.FragmentLoginBinding
 
 import com.udacity.shoestore.R
@@ -28,11 +31,6 @@ class LoginFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
 
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -62,6 +60,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val toolbar = binding.toolbar
+        toolbar.title = "Login"
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
@@ -123,13 +123,24 @@ class LoginFragment : Fragment() {
             }
             false
         }
+        val options = navOptions {
+            anim {
+                enter = R.anim.slide_in_right
+                exit = R.anim.slide_out_left
+                popEnter = R.anim.slide_in_left
+                popExit = R.anim.slide_out_right
+            }
+        }
 
         loginButton.setOnClickListener {
-            loadingProgressBar.visibility = View.VISIBLE
-            loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString()
-            )
+        // navigate to welcome screen
+            NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_welcomeFragment, null , options)
+            onDestroyView()
+//            loadingProgressBar.visibility = View.VISIBLE
+//            loginViewModel.login(
+//                usernameEditText.text.toString(),
+//                passwordEditText.text.toString()
+//            )
         }
     }
 
@@ -147,6 +158,6 @@ class LoginFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding.root.removeAllViews()
     }
 }
