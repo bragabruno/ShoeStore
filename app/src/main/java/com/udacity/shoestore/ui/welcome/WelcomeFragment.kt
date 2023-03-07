@@ -9,25 +9,22 @@ import androidx.navigation.navOptions
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentWelcomeBinding
 
-class WelcomeFragment : Fragment() {
+class       WelcomeFragment : Fragment() {
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding.welcomeFragment
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
 
         val options = navOptions {
             anim {
@@ -39,7 +36,19 @@ class WelcomeFragment : Fragment() {
         }
 
         binding.nextButton.setOnClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_welcomeFragment_to_shoesFragment, null, options)
+            val action = WelcomeFragmentDirections.actionWelcomeFragmentToShoesFragment()
+            NavHostFragment.findNavController(this).navigate(action, options)
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

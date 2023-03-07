@@ -33,11 +33,11 @@ object PlaceholderContent {
 
     private fun addItem(item: Shoe) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP.put(item.id.toString(), item)
     }
 
     private fun createPlaceholderItem(position: Int): Shoe {
-        return Shoe(position.toString(), "Jordan's " + position,1.0,"Nike", makeDetails(position), mutableListOf("Image1", "Image2"))
+        return Shoe(position, "Jordan's " + position,1.0,"Nike", makeDetails(position), "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nike.com%2Ft%2Fjordan-1-mid-sh")
     }
 
     private fun makeDetails(position: Int): String {

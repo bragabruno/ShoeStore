@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/welcomeFragment"
+        android:id="@+id/action_welcome"
         android:title="@string/welcome" />
 </menu>

@@ -1,29 +1,26 @@
 package com.udacity.shoestore.ui.login
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.navigation.Navigation
+import androidx.annotation.StringRes
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
-import com.udacity.shoestore.databinding.FragmentLoginBinding
-
 import com.udacity.shoestore.R
+import com.udacity.shoestore.databinding.FragmentLoginBinding
+import com.udacity.shoestore.ui.welcome.WelcomeFragment
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentLoginBinding? = null
@@ -32,59 +29,43 @@ class LoginFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.loginFragment -> {
-                // navigate to settings screen
-                true
-            }
-            R.id.welcomeFragment -> {
-                // save profile changes
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val toolbar = binding.toolbar
-        toolbar.title = "Login"
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
             .get(LoginViewModel::class.java)
 
         val usernameEditText = binding.username
         val passwordEditText = binding.password
-        val loginButton = binding.login
+        val loginButton = binding.loginButton
         val loadingProgressBar = binding.loading
 
-        loginViewModel.loginFormState.observe(viewLifecycleOwner,
+        loginViewModel.loginFormState.observe(
+            viewLifecycleOwner,
             Observer { loginFormState ->
                 if (loginFormState == null) {
                     return@Observer
                 }
-                loginButton.isEnabled = loginFormState.isDataValid
+                binding.loginButton.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
                     usernameEditText.error = getString(it)
                 }
                 loginFormState.passwordError?.let {
                     passwordEditText.error = getString(it)
                 }
-            })
+            },
+        )
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner,
+        loginViewModel.loginResult.observe(
+            viewLifecycleOwner,
             Observer { loginResult ->
                 loginResult ?: return@Observer
                 loadingProgressBar.visibility = View.GONE
@@ -94,7 +75,8 @@ class LoginFragment : Fragment() {
                 loginResult.success?.let {
                     updateUiWithUser(it)
                 }
-            })
+            },
+        )
 
         val afterTextChangedListener = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -108,7 +90,7 @@ class LoginFragment : Fragment() {
             override fun afterTextChanged(s: Editable) {
                 loginViewModel.loginDataChanged(
                     usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    passwordEditText.text.toString(),
                 )
             }
         }
@@ -118,11 +100,12 @@ class LoginFragment : Fragment() {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 loginViewModel.login(
                     usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    passwordEditText.text.toString(),
                 )
             }
             false
         }
+
         val options = navOptions {
             anim {
                 enter = R.anim.slide_in_right
@@ -131,17 +114,32 @@ class LoginFragment : Fragment() {
                 popExit = R.anim.slide_out_right
             }
         }
-
-        loginButton.setOnClickListener {
-        // navigate to welcome screen
-            NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_welcomeFragment, null , options)
-            onDestroyView()
+//        val bundle = bundleOf("username" to usernameEditText.text.toString())
+//        loginButton.setOnClickListener {
 //            loadingProgressBar.visibility = View.VISIBLE
-//            loginViewModel.login(
-//                usernameEditText.text.toString(),
-//                passwordEditText.text.toString()
-//            )
+//            childFragmentManager.beginTransaction()
+//                .replace(R.id.nav_host_fragment, WelcomeFragment::class.java, bundle, "welcomeFragment")
+//                .commit()
+//            NavHostFragment.findNavController(this).navigate(R.id.action_loginFragment_to_welcomeFragment, null, options)
+//        }
+
+        binding.loginButton.setOnClickListener {
+            // retrive the navController from the NavHostFragment
+            val navController = NavHostFragment.findNavController(this)
+            // navigate to the next destination
+            navController.navigate(R.id.action_loginFragment_to_welcomeFragment, null, options)
+            onDestroy()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isRemoving) {
+            val parentFragment = parentFragment
+            if (parentFragment is NavHostFragment) {
+                parentFragment.childFragmentManager.beginTransaction().remove(this).commit()
+            }
+    }
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {
@@ -158,6 +156,6 @@ class LoginFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        _binding = null
     }
 }

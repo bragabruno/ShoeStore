@@ -3,8 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/loginFragment">
-
+    app:startDestination="@id/hostFragment">
+    <fragment
+        android:id="@+id/hostFragment"
+        android:name="com.udacity.shoestore.HomeFragment"
+        android:label="fragment_host"
+        tools:layout="@layout/fragment_host" >
+        <action
+            android:id="@+id/action_hostFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.udacity.shoestore.ui.login.LoginFragment"
@@ -29,12 +37,11 @@
         android:label="fragment_shoes_list"
         tools:layout="@layout/fragment_shoes_list" >
         <action
-            android:id="@+id/action_shoesFragment_to_shoeDetailFragment"
-            app:destination="@id/shoeDetailFragment" />
+            android:id="@+id/action_shoesFragment_to_shoeDetailsFragment"
+            app:destination="@id/shoeDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/shoeDetailFragment"
+        android:id="@+id/shoeDetailsFragment"
         android:name="com.udacity.shoestore.ShoeDetailsFragment"
-        android:label="fragment_shoe_detail"
-        tools:layout="@layout/fragment_shoe_detail" />
+        android:label="ShoeDetailsFragment" />
 </navigation>

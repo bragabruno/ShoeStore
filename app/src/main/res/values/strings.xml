@@ -99,4 +99,67 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="next">NEXT</string>
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_new_shoe">New Shoe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shoes_store">Shoes Store</string>
+
+
+    <string name="shoe_model">Shoe Model</string>
+    <string-array name="shoe_brand">
+        <item>Adidas</item>
+        <item>Nike</item>
+        <item>Converse</item>
+        <item>Reebok</item>
+        <item>Vans</item>
+    </string-array>
+
+
+    <string-array name="shoe_model_adidas">
+        <item>Ultraboot light</item>
+        <item>Samba</item>
+        <item>Superstar</item>
+        <item>Daily 3.0</item>
+        <item>NMD_R1 V3</item>
+        <item>Stan Smith</item>
+        <item>Galaxy</item>
+        <item>Ultra 4D</item>
+        <item>Nizza RF Slip</item>
+    </string-array>
+
+    <string-array name="shoe_model_nike">
+        <item>Air Force 1</item>
+        <item>Air Max 90</item>
+        <item>Blazer</item>
+        <item>Jordan</item>
+        <item>Invincilbe 3</item>
+        <item>React Infinity 3</item>
+        <item>Pegasus Turbo Next Nature</item>
+    </string-array>
+
+    <string-array name="shoe_model_converse">
+        <item>All Star</item>
+        <item>Chuck Taylor</item>
+        <item>One Star</item>
+        <item>Chuck Taylor All Star 70</item>
+    </string-array>
+
+    <string-array name="shoe_size_array">
+        <item>9.5</item>
+        <item>10</item>
+        <item>10.5</item>
+        <item>11</item>
+        <item>11.5</item>
+        <item>12</item>
+        <item>12.5</item>
+        <item>13</item>
+    </string-array>
 </resources>

@@ -26,14 +26,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
     buildFeatures{
             viewBinding = true
             dataBinding = true
     }
 }
-
+;
 dependencies {
     def room_version = "2.3.0"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,9 +63,12 @@ dependencies {
         }
     }
     // Room components
+    implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
     // To use Kotlin annotation processing tool (kapt)
-    kapt "androidx.room:room-compiler:$room_version"
+//    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

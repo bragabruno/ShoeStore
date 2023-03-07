@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="com.udacity.shoestore.shoesFragment"
+    android:id="@+id/shoe_recyclerview_list"
+    android:name="com.udacity.shoestore.ui.shoes.shoesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:layout_marginTop="70dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.shoes.ShoesFragment"
-    tools:listitem="@layout/fragment_shoes" />
+    tools:listitem="@layout/fragment_shoes"
+    />
