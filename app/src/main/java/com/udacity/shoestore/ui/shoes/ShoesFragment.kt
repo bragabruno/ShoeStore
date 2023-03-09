@@ -18,7 +18,7 @@ import com.udacity.shoestore.placeholder.PlaceholderContent
 /**
  * A fragment representing a list of Items.
  */
-class ShoesFragment : Fragment(), RecyclerViewInterface {
+class ShoesFragment : Fragment(), RecyclerViewInterface, ShoesRecyclerViewAdapter.ItemClickListener {
 
     private lateinit var binding: FragmentShoesBinding
 
@@ -71,6 +71,10 @@ class ShoesFragment : Fragment(), RecyclerViewInterface {
     }
 
     override fun onItemClicked(position: Int) {
+        onDestroy()
+    }
+
+    override fun onItemClick(view: View?, position: Int) {
         NavHostFragment.findNavController(this).navigate(R.id.action_shoesFragment_to_shoeDetailsFragment)
     }
 }

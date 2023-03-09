@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +12,15 @@ import com.udacity.RecyclerViewInterface
 import com.udacity.shoestore.databinding.FragmentShoesBinding
 import com.udacity.shoestore.models.Shoe
 import com.udacity.shoestore.ui.shoes.ShoesFragment
+import com.udacity.shoestore.ui.shoes.ShoesFragmentDirections
+import com.udacity.shoestore.ui.welcome.WelcomeFragmentDirections
 
 class ShoesRecyclerViewAdapter(
     private val values: List<Shoe>,
     private val recyclerViewInterface: RecyclerViewInterface?,
 ) : RecyclerView.Adapter<ShoesRecyclerViewAdapter.ViewHolder>() {
+
+    private var itemViewListener: ItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -36,13 +41,14 @@ class ShoesRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentShoesBinding, recyclerViewInterface: RecyclerViewInterface?) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(binding: FragmentShoesBinding, recyclerViewInterface: RecyclerViewInterface?) : RecyclerView.ViewHolder(binding.root),
+        View.OnClickListener {
         val idView: TextView = binding.itemBrand
         val contentView: TextView = binding.shoeItemName
-
         init {
+
             binding.root.setOnClickListener(
-                View.OnClickListener {
+                {
                     if (recyclerViewInterface != null) {
                         val pos = adapterPosition
                         if (pos != RecyclerView.NO_POSITION) {
@@ -58,15 +64,38 @@ class ShoesRecyclerViewAdapter(
                                 }
                             }
                             // not a good way to do this, and doesn't work
-                            findNavController(ShoesFragment()).navigate(R.id.action_shoesFragment_to_shoeDetailsFragment, null, options)
+                            val action = ShoesFragmentDirections.actionShoesFragmentToShoeDetailsFragment()
+                            findNavController(
+                                recyclerViewInterface as ShoesFragment
+                            ).navigate(action, options)
                         }
                     }
                 },
             )
         }
 
+//        override fun onClick(v: View?) {
+//
+//        }
+
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
+
+        override fun onClick(view: View?) {
+            itemViewListener?.onItemClick(view, adapterPosition)
+        }
+    }
+
+    fun getItems(): List<Shoe> {
+        return values
+    }
+
+    fun setClickListener(itemClickListener: ItemClickListener) {
+        this.itemViewListener = itemClickListener
+    }
+
+    interface ItemClickListener {
+        fun onItemClick(view: View?, position: Int)
     }
 }

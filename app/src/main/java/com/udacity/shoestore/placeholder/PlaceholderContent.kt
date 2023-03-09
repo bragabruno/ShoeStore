@@ -37,14 +37,14 @@ object PlaceholderContent {
     }
 
     private fun createPlaceholderItem(position: Int): Shoe {
-        return Shoe(position, "Jordan's " + position,1.0,"Nike", makeDetails(position), "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nike.com%2Ft%2Fjordan-1-mid-sh")
+        return Shoe(position, "Jordan's " + position, 1.0, "Nike", makeDetails(position), "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nike.com%2Ft%2Fjordan-1-mid-sh")
     }
 
     private fun makeDetails(position: Int): String {
         val builder = StringBuilder()
         builder.append("Details about Item: ").append(position)
 //        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
+        builder.append("\nMore details information here.")
 //        }
         return builder.toString()
     }
