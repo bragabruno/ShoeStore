@@ -1,19 +1,17 @@
-package com.udacity.shoestore
+package com.udacity.shoestore.data.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.RecyclerViewInterface
+import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.FragmentShoesBinding
 import com.udacity.shoestore.models.Shoe
 import com.udacity.shoestore.ui.shoes.ShoesFragment
 import com.udacity.shoestore.ui.shoes.ShoesFragmentDirections
-import com.udacity.shoestore.ui.welcome.WelcomeFragmentDirections
 
 class ShoesRecyclerViewAdapter(
     private val values: List<Shoe>,

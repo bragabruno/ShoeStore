@@ -16,10 +16,9 @@ data class Shoe(
     var size: Double,
     var company: String,
     var description: String,
-    val images: String
+    val images: String,
 ) : Parcelable {
     override fun toString(): String {
-
         if (id == null) id = 0
         return "Shoe(id='$id, name='$name', size=$size, company='$company', description='$description', images='$images')"
     }

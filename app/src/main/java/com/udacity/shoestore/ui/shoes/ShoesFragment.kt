@@ -9,9 +9,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.RecyclerViewInterface
+import com.udacity.shoestore.data.model.RecyclerViewInterface
 import com.udacity.shoestore.R
-import com.udacity.shoestore.ShoesRecyclerViewAdapter
+import com.udacity.shoestore.data.model.ShoesRecyclerViewAdapter
 import com.udacity.shoestore.databinding.FragmentShoesBinding
 import com.udacity.shoestore.placeholder.PlaceholderContent
 

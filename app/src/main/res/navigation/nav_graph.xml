@@ -6,7 +6,7 @@
     app:startDestination="@id/hostFragment">
     <fragment
         android:id="@+id/hostFragment"
-        android:name="com.udacity.shoestore.HomeFragment"
+        android:name="com.udacity.shoestore.ui.HomeFragment"
         android:label="fragment_host"
         tools:layout="@layout/fragment_host" >
         <action
@@ -42,6 +42,6 @@
     </fragment>
     <fragment
         android:id="@+id/shoeDetailsFragment"
-        android:name="com.udacity.shoestore.ShoeDetailsFragment"
+        android:name="com.udacity.shoestore.ui.shoes.ShoeDetailsFragment"
         android:label="ShoeDetailsFragment" />
 </navigation>

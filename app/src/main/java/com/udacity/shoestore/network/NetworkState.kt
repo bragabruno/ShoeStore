@@ -1,4 +1,4 @@
-package com.udacity.shoestore
+package com.udacity.shoestore.network
 
 enum class Status {
     RUNNING,

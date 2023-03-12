@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.navigation.Navigation.findNavController
+import com.udacity.shoestore.ui.HomeFragment
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
